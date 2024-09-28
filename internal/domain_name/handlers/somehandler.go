@@ -1,6 +1,10 @@
 package handlers
 
-import "github.com/gin-gonic/gin"
+import (
+	"net/http"
+
+	"github.com/gin-gonic/gin"
+)
 
 type SomeHandler struct {
 	deps someDep // some dependencies
@@ -14,9 +18,10 @@ func NewSomeHandler(deps someDep) *SomeHandler {
 	}
 }
 
-func (h *SomeHandler) RegisterRouts(engine *gin.Engine) {
-	router := engine.Group("/path")
+func (h *SomeHandler) RegisterRouts(engine *gin.RouterGroup) {
+	engine.GET("/", h.SomeFunction)
 }
 
 func (h *SomeHandler) SomeFunction(ctx *gin.Context) {
+	ctx.String(http.StatusOK, "jenya zdarova")
 }

@@ -1,11 +1,14 @@
-package cmd
+package main
+
+import (
+	"jenya/internal/domain_name/handlers"
+	"jenya/internal/pkg/server"
+	"log"
+)
 
 func main() {
-	// prepare
+	handler := handlers.NewHandler("")
 
-	// repo
-
-	// service
-
-	// handler
+	httpServer := server.NewServer(handler.RegisterRouts())
+	log.Fatal(httpServer.ListenAndServe())
 }
